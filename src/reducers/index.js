@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import currenciesReducer from './currenciesReducer';
+import currenciesReducer, * as fromCurrencies from './currenciesReducer';
 
 export default combineReducers({
     currencies: currenciesReducer
 })
+
+export const searchForMatchingCurrency = (state) =>  fromCurrencies.searchForMatchingCurrency(state.currencies);

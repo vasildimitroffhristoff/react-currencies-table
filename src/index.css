@@ -16,3 +16,12 @@ code {
 th {
   cursor: pointer;
 }
+
+.highlighted {
+  background-color: #6ab04c;
+  color: #fff;
+}
+
+.highlighted td {
+  border-top: 1px solid #59993e !important;
+}

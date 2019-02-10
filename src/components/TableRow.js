@@ -1,9 +1,9 @@
 import React from 'react';
 import TableCell from './TableCell';
 
-export default function TableRow({ row }) {
+export default function TableRow({ row, highlight }) {
   return (
-    <tr key={row.code}>
+    <tr className={highlight ? 'highlighted' : null} key={row.code}>
         <TableCell elementClass={"text-left"}>{row.name}</TableCell>
         <TableCell elementClass={"text-center"}>{row.code}</TableCell>
         <TableCell elementClass={"text-center"}>{row.decimal_digits}</TableCell>
