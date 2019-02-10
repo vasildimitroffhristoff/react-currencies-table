@@ -3,6 +3,18 @@ import { connect } from 'react-redux';
 import { searchItem } from '../actions';
 
 class SearchBar extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          searchField: ''
+      }
+  }  
+
+  handleOnChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+    this.props.searchItem(e.target.value)
+  }
+
   render() {
     return (
         <div className="w-25 mx-auto mt-5">
@@ -13,8 +25,10 @@ class SearchBar extends Component {
                     </span>
                 </div>
                 <input 
-                    onChange={(evt) => this.props.searchItem(evt.target.value)}
+                    value={this.state.searchField}
+                    onChange={(e) => this.handleOnChange(e)}
                     type="text" 
+                    name="searchField"
                     className="form-control rounded-0 p-4 d-block" 
                     placeholder="Enter search" />
             </div>
@@ -23,4 +37,8 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, { searchItem })(SearchBar);
+const mapStateToProps = state => ({
+    searchFilter: state.currencies.searchFilter
+})
+
+export default connect(mapStateToProps, { searchItem })(SearchBar);

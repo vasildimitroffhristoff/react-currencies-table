@@ -6,3 +6,4 @@ export default combineReducers({
 })
 
 export const searchForMatchingCurrency = (state) =>  fromCurrencies.searchForMatchingCurrency(state.currencies);
+export const getSortedCurrencylist = (state) => fromCurrencies.getSortedCurrencylist(state.currencies);

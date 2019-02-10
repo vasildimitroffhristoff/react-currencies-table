@@ -1,9 +1,11 @@
-import { GET_CURRENCIES, SEARCH_ITEM } from '../constants';
-import { findMatchingString } from '../utilities';
+import { GET_CURRENCIES, SEARCH_CURRENCY, SORT_CURRENCIES, CLEAR_SEARCH_CURRENCY } from '../constants';
+import { findMatchingString, isNumber } from '../utilities';
 
 const initialState = {
     currencies: [],
-    filter: ""
+    searchFilter: '',
+    key: 'name',
+    direction: 'asc'
 }
 
 export default function (state = initialState, action) {
@@ -13,12 +15,26 @@ export default function (state = initialState, action) {
                 ...state,
                 currencies: action.payload
             }
-        case SEARCH_ITEM: 
+        
+        case SEARCH_CURRENCY: 
             return {
                 ...state,
-                filter: action.payload
-            }    
+                searchFilter: action.payload
+            }  
+
+        case CLEAR_SEARCH_CURRENCY: 
+            return {
+                ...state,
+                searchFilter: action.payload
+            }      
         
+        case SORT_CURRENCIES:
+            return {
+              ...state,
+              key: action.payload.key,
+              direction: action.payload.direction,
+            }; 
+             
         default:
             return state    
     }
@@ -26,13 +42,38 @@ export default function (state = initialState, action) {
 
 
 export const searchForMatchingCurrency = (state) => {
-    let fields = {};
-    if (state.filter.length > 0) {       
-        fields.match = state.currencies.filter(currency => 
-            findMatchingString(currency, state.filter));
-        fields.nomatch = state.currencies.filter(currency => 
-            !findMatchingString(currency, state.filter));
+    let rows = {};
+    if (state.searchFilter.length > 0) {       
+        rows.match = state.currencies.filter(currency => 
+            findMatchingString(currency, state.searchFilter));
+        rows.nomatch = state.currencies.filter(currency => 
+            !findMatchingString(currency, state.searchFilter));
     } 
-    return fields;
+    return rows;
+}
+
+export const getSortedCurrencylist = (state) => {
+    const sortedData = state.currencies.sort((a, b) => {
+      const sortA = a[state.key];
+      const sortB = b[state.key];
+
+      if (isNumber(sortA) || isNumber(sortB)) {
+        return state.direction === 'asc' ? sortA - sortB : sortB - sortA;
+      }
+
+      const compareA = (sortA || '').toUpperCase();
+      const compareB = (sortB || '').toUpperCase();
+
+      if (compareA < compareB) {
+        return state.direction === 'asc' ? -1 : 1;
+      }
+      if (compareA > compareB) {
+        return state.direction === 'asc' ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedData;
 }
 

@@ -25,3 +25,18 @@ th {
 .highlighted td {
   border-top: 1px solid #59993e !important;
 }
+
+.fa-sort-up {
+  position: relative;
+  bottom: -6px;
+  color: #2ecc71;
+}
+
+.fa-sort-down {
+  color: #e74c3c;
+}
+
+.fa-sort {
+  position: relative;
+  top: 4px;
+}
