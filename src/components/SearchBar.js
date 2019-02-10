@@ -3,21 +3,30 @@ import { connect } from 'react-redux';
 import { searchItem } from '../actions';
 
 class SearchBar extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          searchField: ''
+  state = {
+    searchField: ""
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.searchFilter !== state.searchField) {
+        if (props.searchFilter === "") {
+            return {
+                searchField: props.searchFilter      
+            }       
+        }
       }
-  }  
+      return null;
+  }
 
   handleOnChange = (e) => {
+    const { searchItem } = this.props;
     this.setState({ [e.target.name]: e.target.value })
-    this.props.searchItem(e.target.value)
+    searchItem(e.target.value)
   }
 
   render() {
     return (
-        <div className="w-25 mx-auto mt-5">
+        <div className="w-50 mx-auto mt-5">
             <div className="input-group">
                 <div className="input-group-prepend">
                     <span className="input-group-text rounded-0" id="inputGroupPrepend">

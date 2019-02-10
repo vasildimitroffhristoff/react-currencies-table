@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class TableHeader extends Component {
-  render() {
-    return (
-        <thead className="thead-light">
-            <tr>
-                <th scope="col">
-                    Name 
-                    <i className="fas fa-sort-up float-right"></i>
-                </th>
-                <th scope="col" className="border-left border-right w-25 text-center">
-                    Code 
-                    <i className="fas fa-sort-down float-right"></i>              
-                </th>
-                <th scope="col" className="text-center">
-                    Decimal digits 
-                    <i className="fas fa-sort-down float-right"></i>    
-                </th>
-            </tr>
-        </thead>
-    )
-  }
+export default function TableHeader({ handleColumnHeaderClick, sortKey, direction, columns }) {  
+  return (
+    <tr>
+            {columns.map(({name, key}) => {
+                const isActive = sortKey === key;
+
+                const icon = isActive ? (
+                    direction === 'asc' ? <i className="fas fa-sort-up float-right"></i>
+                    : <i className="fas fa-sort-down float-right"></i>
+                  ) : null;
+
+                return (
+                    <th key={key} onClick={() => handleColumnHeaderClick(key)}>
+                        {name} 
+                        {icon}
+                    </th>
+                )  
+            })}
+    </tr>
+  )
 }
+

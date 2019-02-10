@@ -1,4 +1,4 @@
-import { GET_CURRENCIES, SEARCH_CURRENCY, SORT_CURRENCIES, CLEAR_SEARCH_CURRENCY } from '../constants';
+import { GET_CURRENCIES, SEARCH_CURRENCY, SORT_CURRENCIES, CLEAR_SEARCH_INPUT } from '../constants';
 import api from '../api/common-currencies';
 
 const normalizedData = Object.keys(api).map(currency => { 
@@ -17,7 +17,7 @@ export const searchItem = (text) => ({
 });
 
 export const clearSearchItem = () => ({
-    type: CLEAR_SEARCH_CURRENCY,
+    type: CLEAR_SEARCH_INPUT,
     payload: ''
 });
 

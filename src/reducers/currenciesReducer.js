@@ -1,4 +1,4 @@
-import { GET_CURRENCIES, SEARCH_CURRENCY, SORT_CURRENCIES, CLEAR_SEARCH_CURRENCY } from '../constants';
+import { GET_CURRENCIES, SEARCH_CURRENCY, SORT_CURRENCIES, CLEAR_SEARCH_INPUT } from '../constants';
 import { findMatchingString, isNumber } from '../utilities';
 
 const initialState = {
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
                 searchFilter: action.payload
             }  
 
-        case CLEAR_SEARCH_CURRENCY: 
+        case CLEAR_SEARCH_INPUT: 
             return {
                 ...state,
                 searchFilter: action.payload

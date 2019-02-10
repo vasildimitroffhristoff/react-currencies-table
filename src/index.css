@@ -28,15 +28,10 @@ th {
 
 .fa-sort-up {
   position: relative;
-  bottom: -6px;
+  bottom: -8px;
   color: #2ecc71;
 }
 
 .fa-sort-down {
   color: #e74c3c;
-}
-
-.fa-sort {
-  position: relative;
-  top: 4px;
 }

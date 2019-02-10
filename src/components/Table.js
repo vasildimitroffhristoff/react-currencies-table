@@ -10,10 +10,8 @@ class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        sortParams: {
-            direction: null,
-            sortKey: 'name'
-        }
+        direction: null,
+        sortKey: null
     }
   }  
 
@@ -21,32 +19,30 @@ class Table extends Component {
       this.props.getCurrencies();
   }
 
-  handleColumnHeaderClick(sortKey) {
+  handleColumnHeaderClick = (columnKey) => {
     this.props.clearSearchItem();
-    const {
-      sortParams: { direction }
-    } = this.state;
-
+    const { direction } = this.state;
     const sortDirection = direction === "desc" ? "asc" : "desc";
-    // const sortedCollection = this.props.currencies.concat().sort(sortBy(col));
     this.setState({
-      sortParams: {
         direction: sortDirection,
-        key: sortKey
-      }
+        sortKey: columnKey
     });
-    this.props.sortBy(sortKey,this.state.sortParams.direction);
+    this.props.sortBy(columnKey, sortDirection);
   }
 
   render() {
-    const { searchFilter, currencies, matchingFields } = this.props;
-    const { direction, sortKey } = this.state.sortParams;
-    const sortIcon = direction === "desc" ? 
-        <i className="fas fa-sort-up float-right"></i> : 
-        <i className="fas fa-sort-down float-right"></i>; 
-
     let tableRows;
+    const { 
+        searchFilter, 
+        currencies, 
+        matchingFields 
+    } = this.props;
 
+    const { 
+        sortKey, 
+        direction 
+    } = this.state;
+ 
     if (searchFilter.length > 0 && Object.keys(matchingFields).length > 0) {       
         tableRows = (
             <>
@@ -57,24 +53,22 @@ class Table extends Component {
     } else {
         tableRows = currencies.map( row => <TableRow key={row.code} row={row} />);
     }
+    
+    const columns = [
+        {name: "Name", key:"name"}, 
+        {name: "Code", key:"code"},
+        {name: "Decimal digits", key:"decimal_digits"}
+    ];
 
     return (
-        <table className="table w-75 mx-auto mt-3">
+        <table className="table w-50 mx-auto mt-3 border">
             <thead className="thead-light">
-                <tr>
-                    <th onClick={() => this.handleColumnHeaderClick("name")} scope="col">
-                        Name 
-                        <i class="fas fa-sort float-right"></i>
-                    </th>
-                    <th onClick={() => this.handleColumnHeaderClick("code")} scope="col" className="border-left border-right w-25 text-center">
-                        Code 
-                        <i class="fas fa-sort float-right"></i>
-                    </th>
-                    <th onClick={() => this.handleColumnHeaderClick("decimal_digits")} scope="col" className="text-center">
-                        Decimal digits 
-                        <i class="fas fa-sort float-right"></i>
-                    </th>
-                </tr>
+                <TableHeader 
+                    handleColumnHeaderClick = {this.handleColumnHeaderClick} 
+                    sortKey={sortKey} 
+                    direction={direction}
+                    columns={columns}
+                    />
             </thead>
             <tbody>
                 {tableRows}
@@ -85,7 +79,11 @@ class Table extends Component {
 }
 
 const mapStateToProps = state => {
-    const { searchFilter, key: sortKey, direction } = state.currencies;
+    const { 
+        searchFilter, 
+        key: sortKey, 
+        direction 
+    } = state.currencies;
 
     return {
         searchFilter,
