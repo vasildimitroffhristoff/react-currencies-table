@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCurrencies, sortBy, clearSearchItem } from '../actions';
+import { getCurrencies, sortBy, clearSearchInput } from '../actions';
 import { searchForMatchingCurrency, getSortedCurrencylist } from '../reducers/';
-import PropTypes from 'prop-types';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
@@ -20,7 +19,7 @@ class Table extends Component {
   }
 
   handleColumnHeaderClick = (columnKey) => {
-    this.props.clearSearchItem();
+    this.props.clearSearchInput();
     const { direction } = this.state;
     const sortDirection = direction === "desc" ? "asc" : "desc";
     this.setState({
@@ -89,4 +88,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getCurrencies, sortBy, clearSearchItem })(Table);
+export default connect(mapStateToProps, { getCurrencies, sortBy, clearSearchInput })(Table);

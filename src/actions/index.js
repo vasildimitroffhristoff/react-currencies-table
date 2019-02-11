@@ -7,12 +7,12 @@ export const getCurrencies = () => ({
     payload: normalizeData(api)
 });
 
-export const searchItem = (text) => ({
+export const searchCurrency = (text) => ({
     type: SEARCH_CURRENCY,
     payload: text
 });
 
-export const clearSearchItem = () => ({
+export const clearSearchInput = () => ({
     type: CLEAR_SEARCH_INPUT,
     payload: ''
 });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchItem } from '../actions';
+import { searchCurrency } from '../actions';
 
 class SearchBar extends Component {
   state = {
@@ -19,9 +19,9 @@ class SearchBar extends Component {
   }
 
   handleOnChange = (e) => {
-    const { searchItem } = this.props;
+    const { searchCurrency } = this.props;
     this.setState({ [e.target.name]: e.target.value })
-    searchItem(e.target.value)
+    searchCurrency(e.target.value)
   }
 
   render() {
@@ -50,4 +50,4 @@ const mapStateToProps = state => ({
     searchFilter: state.currencies.searchFilter
 })
 
-export default connect(mapStateToProps, { searchItem })(SearchBar);
+export default connect(mapStateToProps, { searchCurrency })(SearchBar);

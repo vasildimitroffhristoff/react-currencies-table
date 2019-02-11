@@ -7,8 +7,9 @@ export default function TableHeader({ handleColumnHeaderClick, sortKey, directio
                 const isActive = sortKey === key;
 
                 const icon = isActive ? (
-                    direction === 'asc' ? <i className="fas fa-sort-up float-right"></i>
-                    : <i className="fas fa-sort-down float-right"></i>
+                    direction === 'asc' ? 
+                         <i className="fas fa-sort-up float-right"></i>
+                        : <i className="fas fa-sort-down float-right"></i>
                   ) : null;
 
                 return (
