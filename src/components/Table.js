@@ -35,7 +35,8 @@ class Table extends Component {
     const { 
         searchFilter, 
         currencies, 
-        matchingFields 
+        matchingFields,
+        columns
     } = this.props;
 
     const { 
@@ -54,12 +55,6 @@ class Table extends Component {
         tableRows = currencies.map( row => <TableRow key={row.code} row={row} />);
     }
     
-    const columns = [
-        {name: "Name", key:"name"}, 
-        {name: "Code", key:"code"},
-        {name: "Decimal digits", key:"decimal_digits"}
-    ];
-
     return (
         <table className="table w-50 mx-auto mt-3 border">
             <thead className="thead-light">

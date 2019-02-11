@@ -10,4 +10,9 @@ export const sortBy = (key) => {
 
 export const isNumber = (n) => !isNaN(parseFloat(n)) && isFinite(n);
 
-  
+export const normalizeData = (data) => {
+    return Object.keys(data).map(currencyItem => { 
+        const { name, code, decimal_digits, name_plural, symbol } = data[currencyItem];
+        return { name, code, decimal_digits, name_plural, symbol }
+    });  
+}
