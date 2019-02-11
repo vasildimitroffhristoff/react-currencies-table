@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function TableHeader({ handleColumnHeaderClick, sortKey, direction, columns }) {  
   return (
@@ -23,3 +24,9 @@ export default function TableHeader({ handleColumnHeaderClick, sortKey, directio
   )
 }
 
+TableHeader.propTypes = {
+    handleColumnHeaderClick: PropTypes.func,
+    sortKey: PropTypes.string,
+    direction: PropTypes.string,
+    columns: PropTypes.array
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TableCell from './TableCell';
 
 export default function TableRow({ row, highlight }) {
@@ -10,3 +11,9 @@ export default function TableRow({ row, highlight }) {
     </tr>
   )
 }
+
+TableRow.propTypes = {
+  row: PropTypes.object,  
+  highlight: PropTypes.bool
+};
+

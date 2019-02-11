@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { searchCurrency } from '../actions';
 
@@ -45,6 +46,11 @@ class SearchBar extends Component {
     )
   }
 }
+
+SearchBar.propTypes = {
+    searchCurrency: PropTypes.func,
+    searchFilter: PropTypes.string
+};
 
 const mapStateToProps = state => ({
     searchFilter: state.currencies.searchFilter

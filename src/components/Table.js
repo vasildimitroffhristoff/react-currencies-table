@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCurrencies, sortBy, clearSearchInput } from '../actions';
 import { searchForMatchingCurrency, getSortedCurrencylist } from '../reducers/';
+import PropTypes from 'prop-types';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
@@ -71,6 +72,17 @@ class Table extends Component {
     )
   }
 }
+
+Table.propTypes = {
+    clearSearchInput: PropTypes.func,
+    getCurrencies: PropTypes.func,
+    sortBy: PropTypes.func,
+    searchFilter: PropTypes.string,
+    currencies: PropTypes.array,
+    matchingFields: PropTypes.object,
+    sortKey: PropTypes.string,
+    direction: PropTypes.string
+};
 
 const mapStateToProps = state => {
     const { 
