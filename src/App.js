@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import Table from './components/Table';
-// import SearchBar from './components/SearchBar';
-import SearchContainer from './containers/SearchContainer';
+import SearchBar from './components/SearchBar';
 
 class App extends Component { 
   render() {
@@ -15,7 +14,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-          <SearchContainer />
+          <SearchBar />
           <Table columns={columns} />
       </Provider>
     );
